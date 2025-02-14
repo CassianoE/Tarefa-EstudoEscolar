@@ -1,10 +1,7 @@
 package app.entity;
 
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
@@ -13,6 +10,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.validator.constraints.br.CPF;
+
+import java.util.List;
 
 @Getter
 @Setter
@@ -37,4 +36,8 @@ public class Professor {
             message = "A especialidade deve conter pelo menos duas palavras separadas por um espaço, se preenchida"
     )
     private String especialidade;
+
+    // Relacionamento ManyToMany: um professor pode lecionar em várias turmas
+    @ManyToMany(mappedBy = "professorList")  // mapeado pela lista de professores da Turma
+    private List<Turma> turmaList;
 }
