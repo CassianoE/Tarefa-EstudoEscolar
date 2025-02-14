@@ -28,7 +28,7 @@ public class Turma {
     private List<Aluno> alunoList;
 
     // Relacionamento ManyToMany: uma turma pode ter vários professores
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
             name = "turma_professor",  // Nome da tabela associativa
             joinColumns = @JoinColumn(name = "turma_id"),  // Chave estrangeira para Turma
