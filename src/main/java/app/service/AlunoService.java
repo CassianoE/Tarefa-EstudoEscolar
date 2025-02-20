@@ -42,4 +42,8 @@ public class AlunoService {
         this.alunoRepository.deleteById(id);
         return "O Aluno " + id + " foi excluído com sucesso!";
     }
+
+    public List<Aluno> findStudentsStartingWith (String nome) {
+        return this.alunoRepository.findByNomeStartingWith(nome);
+    }
 }

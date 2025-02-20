@@ -68,6 +68,15 @@ public class AlunoController {
         }
     }
 
+    @GetMapping("/startingWith")
+    public ResponseEntity<List<Aluno>> findStartingWith(@RequestParam String nome){
+        try {
+            List<Aluno> alunoList = this.alunoService.findStudentsStartingWith(nome);
+            return new ResponseEntity<>(alunoList, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(null,HttpStatus.BAD_REQUEST);
+        }
+    }
 
 
 }
