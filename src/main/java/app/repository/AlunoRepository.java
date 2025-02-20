@@ -12,5 +12,5 @@ public interface AlunoRepository extends JpaRepository<Aluno, Long> {
 
     List<Aluno> findByTelefoneContaining(String telefone);
 
-    List<Aluno> findByTurmaNome(String nomeTurma);
+    List<Aluno> findByTurma(String turma);
 }
