@@ -2,6 +2,7 @@ package app.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -30,13 +31,10 @@ public class Turma {
     private List<Aluno> alunoList;
 
     // Relacionamento ManyToMany: uma turma pode ter vários professores
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(
-            name = "turma_professor",  // Nome da tabela associativa
-            joinColumns = @JoinColumn(name = "turma_id"),  // Chave estrangeira para Turma
-            inverseJoinColumns = @JoinColumn(name = "professor_id")  // Chave estrangeira para Professor
-    )
+    @ManyToMany
+    @JoinTable(name = "turma_professor")
     @JsonIgnoreProperties("turmaList")
+    @NotEmpty(message = "Não é possível existir uam turma sem pelo menos um professor associado")
     private List<Professor> professorList;
 
     // Relacionamento ManyToOne: uma turma está associada a um único curso
