@@ -1,6 +1,7 @@
 package app.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
@@ -39,5 +40,6 @@ public class Professor {
 
     // Relacionamento ManyToMany: um professor pode lecionar em várias turmas
     @ManyToMany(mappedBy = "professorList")  // mapeado pela lista de professores da Turma
+    @JsonIgnoreProperties("professorList")
     private List<Turma> turmaList;
 }

@@ -1,6 +1,8 @@
 package app.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -34,10 +36,11 @@ public class Turma {
             joinColumns = @JoinColumn(name = "turma_id"),  // Chave estrangeira para Turma
             inverseJoinColumns = @JoinColumn(name = "professor_id")  // Chave estrangeira para Professor
     )
+    @JsonIgnoreProperties("turmaList")
     private List<Professor> professorList;
 
     // Relacionamento ManyToOne: uma turma está associada a um único curso
     @ManyToOne
-    @JoinColumn(name = "curso_id", nullable = false)  // Chave estrangeira para Curso
+    @NotNull(message = "o curso e obrigatorio ao salvar uma turma")
     private Curso curso;  // Curso associado à turma
 }
