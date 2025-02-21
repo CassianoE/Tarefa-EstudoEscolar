@@ -38,4 +38,16 @@ public class ProfessorService {
         this.professorRepository.deleteById(id);
         return "O professor " + id + " foi excluído com sucesso!";
     }
+
+    public List<Professor> findProfessorsByComecoNomeOrEspecialidade(String nome, String especialidade) {
+        return this.professorRepository.findByComecoNomeOuEspecialidade(nome, especialidade);
+    }
+
+    public List<Professor> findByWithoutGmail() {
+        return this.professorRepository.findByEmailNotContaining("@gmail.com");
+    }
+
+    public Professor findByEmail(String email) {
+        return this.professorRepository.findByEmail(email);
+    }
 }

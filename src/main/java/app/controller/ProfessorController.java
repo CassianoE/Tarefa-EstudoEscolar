@@ -70,4 +70,35 @@ public class ProfessorController {
             return new ResponseEntity<>(null,HttpStatus.BAD_REQUEST);
         }
     }
+
+    @GetMapping("/findByNomeOrEspecialidade")
+    public ResponseEntity<List<Professor>> findByComecoNomeOuEspecialidade(@RequestParam String nome, @RequestParam String especialidade) {
+        try {
+            List<Professor> professorList = this.professorService.findProfessorsByComecoNomeOrEspecialidade(nome, especialidade);
+            return new ResponseEntity<>(professorList, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @GetMapping("/findByWithoutGmail")
+    public ResponseEntity<List<Professor>> findByWithoutGmail() {
+        try {
+            List<Professor> professorList = this.professorService.findByWithoutGmail();
+            return new ResponseEntity<>(professorList, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @GetMapping("/findByEmail")
+    public ResponseEntity<Professor> findByEmail(@RequestParam String email) {
+        try {
+            Professor professor = this.professorService.findByEmail(email);
+            return new ResponseEntity<>(professor, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+        }
+    }
+
 }
