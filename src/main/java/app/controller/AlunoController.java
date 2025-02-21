@@ -69,14 +69,37 @@ public class AlunoController {
     }
 
     @GetMapping("/startingWith")
-    public ResponseEntity<List<Aluno>> findStartingWith(@RequestParam String nome){
+    public ResponseEntity<List<Aluno>> findStartingWith(@RequestParam String nome) {
         try {
             List<Aluno> alunoList = this.alunoService.findStudentsStartingWith(nome);
             return new ResponseEntity<>(alunoList, HttpStatus.OK);
         } catch (Exception e) {
-            return new ResponseEntity<>(null,HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @GetMapping("/containingNumber")
+    public ResponseEntity<List<Aluno>> findContainingNumber(@RequestParam String telefone){
+        try {
+            List<Aluno> alunoList = this.alunoService.findStudentsByTelefoneContaining(telefone);
+            return new ResponseEntity<>(alunoList, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @GetMapping("/turmaName")
+    public ResponseEntity<List<Aluno>> findAlunosByTurma(@RequestParam String turma){
+        try {
+            List<Aluno> alunoList = this.alunoService.findStudentsByTurma(turma);
+            return new ResponseEntity<>(alunoList, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
         }
     }
 
 
-}
+    }
+
+
+
