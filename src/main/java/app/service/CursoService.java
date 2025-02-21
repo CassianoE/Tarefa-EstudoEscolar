@@ -40,5 +40,10 @@ public class CursoService {
         return "O Curso" + id + " foi excluído com sucesso!";
     }
 
+    public List<Curso> findByNome(String nome){
+        List<Curso> cursoList = this.cursoRepository.findByNomeIgnoreCase(nome);
+        return cursoList;
+    }
+
 
 }

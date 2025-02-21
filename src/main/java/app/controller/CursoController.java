@@ -68,4 +68,14 @@ public class CursoController {
             return new ResponseEntity<>(null,HttpStatus.BAD_REQUEST);
         }
     }
+
+    @GetMapping("/findByNome")
+    public ResponseEntity<List<Curso>> findByNome(@RequestParam String nome){
+        try {
+            List<Curso> cursoList = this.cursoService.findByNome(nome);
+            return new ResponseEntity<>(cursoList, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+        }
+    }
 }
