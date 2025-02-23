@@ -14,6 +14,17 @@ public class ProfessorService {
     private ProfessorRepository professorRepository;
 
     public String save(Professor professor) {
+
+        // Regra 1: Verificar se o email já está cadastrado
+        if (professorRepository.findByEmail(professor.getEmail()) != null) {
+            throw new RuntimeException("Email já cadastrado!");
+        }
+
+        // Regra 2: Verificar se o email contém "@outlook.com"
+        if (professor.getEmail().toLowerCase().contains("@outlook.com")) {
+            throw new RuntimeException("Domínio de e-mail não permitido!");
+        }
+
         this.professorRepository.save(professor);
         return "Professor salvo com sucesso!";
     }
