@@ -32,6 +32,7 @@ public class Aluno {
     @JoinColumn(name = "turma_id", nullable = false)  // A coluna "turma_id" será a chave estrangeira
     private Turma turma;
 
+    private boolean cadastroCompleto;
 
 
 }

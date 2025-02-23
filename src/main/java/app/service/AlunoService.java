@@ -14,6 +14,19 @@ public class AlunoService {
     private AlunoRepository alunoRepository;
 
     public String save(Aluno aluno){
+
+        // Verificar se o CPF já está cadastrado
+        if (alunoRepository.findByCpf(aluno.getCpf()) != null) {
+            throw new RuntimeException("CPF já cadastrado!");
+        }
+
+        // Setar cadastroCompleto baseado no telefone
+        if (aluno.getTelefone() == null || aluno.getTelefone().trim().isEmpty()) {
+            aluno.setCadastroCompleto(false);
+        } else {
+            aluno.setCadastroCompleto(true);
+        }
+
         this.alunoRepository.save(aluno);
         return "Aluno salvo com sucesso!";
     }
@@ -53,5 +66,9 @@ public class AlunoService {
 
     public List<Aluno> findStudentsByTurma(String turma) {
         return this.alunoRepository.findByTurmaNome(turma);
+    }
+
+    public List<Aluno> findByCPF(String cpf) {
+        return this.alunoRepository.findByCpf(cpf);
     }
 }
