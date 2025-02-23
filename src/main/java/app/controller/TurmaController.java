@@ -68,4 +68,44 @@ public class TurmaController {
             return new ResponseEntity<>(null,HttpStatus.BAD_REQUEST);
         }
     }
+
+    @GetMapping("/findByanoBetween")
+    public ResponseEntity<List<Turma>> findByAnoBetween(@RequestParam int anoInicio, @RequestParam int anoFim) {
+        try {
+            List<Turma> turmaList = this.turmaService.findTurmasByAnoBetween(anoInicio, anoFim);
+            return new ResponseEntity<>(turmaList, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @GetMapping("/findBysemestreAndAno")
+    public ResponseEntity<List<Turma>> findBySemestreAndAno(@RequestParam String semestre, @RequestParam int ano) {
+        try {
+            List<Turma> turmaList = this.turmaService.findTurmasBySemestreAndAno(semestre, ano);
+            return new ResponseEntity<>(turmaList, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @GetMapping("/findBynomeAndTurno")
+    public ResponseEntity<List<Turma>> findByNomeAndTurno(@RequestParam String nome, @RequestParam String turno) {
+        try {
+            List<Turma> turmaList = this.turmaService.findTurmasByNomeAndTurno(nome, turno);
+            return new ResponseEntity<>(turmaList, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @GetMapping("/findByCurso")
+    public ResponseEntity<List<Turma>> findByCurso(@RequestParam String nomeCurso) {
+        try {
+            List<Turma> turmaList = this.turmaService.findByCurso(nomeCurso);
+            return new ResponseEntity<>(turmaList, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+        }
+    }
 }
